@@ -11,7 +11,9 @@ const Navbar = () => {
             .catch(error => console.log(error))
     }
     const navItems = <>
-        <li><a>Home</a></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/addService'>Add Service</Link></li>
+
         <li><a>About</a></li>
         {
             user?.email ? <>
