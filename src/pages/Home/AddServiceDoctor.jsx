@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 
 
 
@@ -8,14 +9,27 @@ const AddServiceDoctor = () => {
         const serviceName = form.serviceName.value;
         const servicePhoto = form.photo.value;
         const email = form.email.value;
+        const money = form.money.value;
         console.log(serviceName, servicePhoto, email)
-        const service = { serviceName, servicePhoto, email };
+        const service = { serviceName, servicePhoto, email,money };
         fetch('http://localhost:3000/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(service)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'success!',
+                    text: 'Services Aded succesfully',
+                    icon: 'success',
+                    confirmButtonText: 'ok'
+                  })
+            }
         })
 
 
@@ -35,6 +49,8 @@ const AddServiceDoctor = () => {
                     <input type="text" placeholder="Enter Service Name" name="serviceName" className="input input-bordered  input-lg w-full " />
                     <h2 className="text-2xl font-semibold">Email Address</h2>
                     <input type="text" placeholder="Enter Your Email" name="email" className="input input-bordered  input-lg w-full " />
+                    <h2 className="text-2xl font-semibold">Booking Money</h2>
+                    <input type="text" placeholder="Enter Booking Money" name="money" className="input input-bordered  input-lg w-full " />
                     <h2 className="text-2xl font-semibold">photo url</h2>
                     <input type="text" placeholder="Enter Photo Url" name="photo" className="input input-bordered input-lg w-full " />
                 </div>
